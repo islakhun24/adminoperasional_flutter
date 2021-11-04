@@ -89,6 +89,18 @@ class Api {
     return false;
 
   }
+
+  Future<bool> updateNotif() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? jwt = preferences.getString('jwt');
+    final response = await http.get(
+        Uri.parse(Url.DASHBOARD_NOTIF_UPDATE),
+        headers: {'x-access-token': jwt!});
+    if (response.statusCode == 200) return true;
+    return false;
+
+  }
+
   Future<ResponseCountNotif> countNotif() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? jwt = preferences.getString('jwt');

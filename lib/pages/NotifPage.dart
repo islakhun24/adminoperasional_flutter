@@ -30,7 +30,9 @@ class _NotifPageState extends State<NotifPage> {
         title: Text('Notifikasi'),
         automaticallyImplyLeading: true,
         leading: IconButton(icon: Icon(Icons.arrow_back_ios),
-          onPressed: ()=> Navigator.pop(context, false),
+          onPressed: (){
+           api.updateNotif().then((value) => Navigator.pop(context, false));
+          },
         ),
       ),
       body: Container(

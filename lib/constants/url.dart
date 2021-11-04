@@ -11,4 +11,5 @@ class Url {
   static const DASHBOARD_STATS = "${BASE_URL}/mobile/admin/project/stats";
   static const DASHBOARD_COUNT_NOTIF = "${BASE_URL}/mobile/admin/notif/count";
   static const DASHBOARD_NOTIFS = "${BASE_URL}/mobile/admin/notif";
+  static const DASHBOARD_NOTIF_UPDATE = "${BASE_URL}/mobile/admin/notif/update";
 }
