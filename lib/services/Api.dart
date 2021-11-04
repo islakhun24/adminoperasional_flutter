@@ -2,8 +2,10 @@
 
 import 'dart:convert';
 
+import 'package:admin_operasional/models/notif.dart';
 import 'package:admin_operasional/models/project.dart';
 import 'package:admin_operasional/models/response_dashboard.dart';
+import 'package:admin_operasional/models/response_notif_count.dart';
 import 'package:admin_operasional/models/response_project.dart';
 import 'package:admin_operasional/models/smu.dart';
 
@@ -58,7 +60,24 @@ class Api {
       throw Exception('Failed to load album');
     }
   }
-
+  Future<List<Notif>> notifs() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? jwt = preferences.getString('jwt');
+    final response = await http.get(
+        Uri.parse(Url.DASHBOARD_NOTIFS),
+        headers: {'x-access-token': jwt!});
+    print(response.body);
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      // final parsed = json.
+      return notifFromJson(response.body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
+  }
   Future<bool> adminSelesai(List<Smu> fd, int id) async {
     var parsed = json.encode(fd);
     print(parsed);
@@ -70,7 +89,23 @@ class Api {
     return false;
 
   }
-
+  Future<ResponseCountNotif> countNotif() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? jwt = preferences.getString('jwt');
+    final response = await http.get(
+        Uri.parse(Url.DASHBOARD_COUNT_NOTIF),
+        headers: {'x-access-token': jwt!});
+    print('Data : '+response.body.toString());
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return ResponseCountNotif.fromJson(jsonDecode(response.body));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
+  }
   Future<DashboardProject> dashboard() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? jwt = preferences.getString('jwt');

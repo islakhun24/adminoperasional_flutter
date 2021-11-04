@@ -3,9 +3,12 @@
 
 import 'dart:convert';
 
+import 'package:admin_operasional/models/notif.dart';
 import 'package:admin_operasional/models/project.dart';
 import 'package:admin_operasional/models/response_dashboard.dart';
+import 'package:admin_operasional/models/response_notif_count.dart';
 import 'package:admin_operasional/models/response_project.dart';
+import 'package:admin_operasional/pages/NotifPage.dart';
 import 'package:admin_operasional/pages/empty.dart';
 import 'package:admin_operasional/pages/list_page.dart';
 import 'package:admin_operasional/pages/login_page.dart';
@@ -186,16 +189,16 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
 
-                          FutureBuilder<DashboardProject>(
-                            future: api.dashboard(),
-                            builder: (context, AsyncSnapshot<DashboardProject> snapshot){
+                          FutureBuilder<ResponseCountNotif>(
+                            future: api.countNotif(),
+                            builder: (context, AsyncSnapshot<ResponseCountNotif> snapshot){
                               return GestureDetector(
                                   onTap: () {
                                     if(snapshot.hasData){
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => ProjectPage(data: snapshot.data?.data)));
+                                              builder: (context) => NotifPage()));
                                     }else{
                                       Navigator.push(
                                           context,
@@ -207,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                                     child:  _customCard(
                                         imageUrl: "notifications.png",
                                         item: "Notifikasi",
-                                        duration: "0 notifikasi baru"),
+                                        duration: "${snapshot.data != null ? snapshot.data!.jumlah: '0'} notifikasi baru"),
                                   )
                               );
 

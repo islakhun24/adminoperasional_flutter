@@ -9,8 +9,10 @@ class Notif {
   String? from;
   String? to;
   String? team;
-  String? read;
-  String? project_id;
+  int? read;
+  int? project_id;
+  String? createdAt;
+  String? updatedAt;
 
   Notif({
     required this.id,
@@ -20,7 +22,9 @@ class Notif {
     required this.to,
     required this.team,
     required this.read,
-    required this.project_id
+    required this.project_id,
+    required this.createdAt,
+    required this.updatedAt
   });
 
   factory Notif.fromJson(Map<String, dynamic> json)  {
@@ -32,7 +36,9 @@ class Notif {
       to: json['to'],
       team: json['team'],
       read: json['read'],
-      project_id: json['project_id']
+      project_id: json['project_id'],
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt']
     );
   }
   Map<String, dynamic> toJson() {
@@ -44,21 +50,23 @@ class Notif {
       'to':to,
       'team':team,
       'read':read,
-      'project_id':project_id
+      'project_id':project_id,
+      'createdAt':createdAt,
+      'updatedAt':updatedAt
     };
   }
 
   @override
   String toString() {
-    return 'Smu{id:$id, header:$header, message:$message, from:$from, to:$to, team:$team, read:$read, project_id:$project_id}';
+    return 'Smu{id:$id, header:$header, message:$message, from:$from, to:$to, team:$team, read:$read, project_id:$project_id}}, createdAt:$createdAt}, updatedAt:$updatedAt}}';
   }
 }
-List<Notif> smuFromJson(String jsonData) {
+List<Notif> notifFromJson(String jsonData) {
   final data = json.decode(jsonData);
   return List<Notif>.from(data.map((item) => Notif.fromJson(item)));
 }
 
-String smuToJson(Notif data) {
+String notifToJson(Notif data) {
   final jsonData = data.toJson();
   return json.encode(jsonData);
 }

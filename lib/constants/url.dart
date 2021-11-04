@@ -9,4 +9,6 @@ class Url {
   static const ADMIN_SELESAI = "${BASE_URL}/main2/projek/admin/smu/";
   static const DASHBOARD = "${BASE_URL}/mobile/admin/project";
   static const DASHBOARD_STATS = "${BASE_URL}/mobile/admin/project/stats";
+  static const DASHBOARD_COUNT_NOTIF = "${BASE_URL}/mobile/admin/notif/count";
+  static const DASHBOARD_NOTIFS = "${BASE_URL}/mobile/admin/notif";
 }
